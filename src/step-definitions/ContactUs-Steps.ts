@@ -1,4 +1,4 @@
-import { When,Then } from "@cucumber/cucumber";
+import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { pageFixture } from "./hooks/BrowserContextFixture";
 
@@ -40,4 +40,29 @@ Then('I should presented with contact us unsuccessful lastname message', async (
 Then('I should presented with contact us unsuccessful email message', async () => {
     let innerText = await pageFixture.page.locator("body").innerText()
     expect(innerText).toContain("Error: all fields are required\nError: Invalid email address");
+});
+
+
+When('I type a first name as {string}', async (firstname: string) => {
+    let firstNameField = pageFixture.page.getByPlaceholder('First Name');
+    await firstNameField.click();
+    await firstNameField.fill(firstname);
+});
+
+When('I type a last name as {string}', async (lastname: string) => {
+    let lastNameField = pageFixture.page.getByPlaceholder('Last Name');
+    await lastNameField.click();
+    await lastNameField.fill(lastname);
+});
+
+When('I type an email as {string}', async (email: string) => {
+    let emailField = pageFixture.page.getByPlaceholder('Email Address');
+    await emailField.click();
+    await emailField.fill(email);
+});
+
+When('I type a comment as {string} {string}', async (comment: string, numara: number) => {
+    let commentField = pageFixture.page.getByPlaceholder('Comments');
+    await commentField.click();
+    await commentField.fill(`${comment}  ${numara}`);
 });

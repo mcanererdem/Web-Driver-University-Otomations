@@ -75,6 +75,7 @@ When('I type a random first name', async () => {
     await firstNameField.fill(firstname);
 });
 
+// burası olmamış
 When('I type a random last name', async () => {
     let lastname = faker.person.lastName("male");
     let lastNameField = pageFixture.page.getByRole('textbox', { name: 'Last Name' });
